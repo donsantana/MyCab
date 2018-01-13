@@ -41,7 +41,7 @@ class CallCenterController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("CallCenterViewCell", owner: self, options: nil)?.first as! CallCenterViewCell
-        
+        print(self.telefonosCallCenter[indexPath.row].operadora)
         cell.ImagenOperadora.image = UIImage(named: self.telefonosCallCenter[indexPath.row].operadora)
         cell.NumeroTelefono.text = self.telefonosCallCenter[indexPath.row].numero
 

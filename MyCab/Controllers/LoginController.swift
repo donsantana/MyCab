@@ -53,7 +53,7 @@ class LoginController: UIViewController, UITextFieldDelegate{
         
         if CConexionInternet.isConnectedToNetwork() == true{
            
-            myvariables.socket = SocketIOClient(socketURL: URL(string: "http://108.179.202.211:6027")!, config: [.log(false), .forcePolling(true)])
+            myvariables.socket = SocketIOClient(socketURL: URL(string: "http://108.179.202.211:6037")!, config: [.log(false), .forcePolling(true)])
             myvariables.socket.connect()
             print("Tratando de conectar")
 

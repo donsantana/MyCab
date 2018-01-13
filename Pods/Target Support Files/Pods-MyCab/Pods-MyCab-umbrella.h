@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_TaxiPrimeroVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_TaxiPrimeroVersionString[];
+FOUNDATION_EXPORT double Pods_MyCabVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_MyCabVersionString[];
 

@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "84F571421BCE958200FC18D5"
                BuildableName = "UnTaxi.temp_caseinsensitive_rename.app"
-               BlueprintName = "TaxiPrimero"
-               ReferencedContainer = "container:TaxiPrimero.xcodeproj">
+               BlueprintName = "MyCab"
+               ReferencedContainer = "container:MyCab.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,34 +29,14 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "84F571561BCE958200FC18D5"
-               BuildableName = "UnTaxi.temp_caseinsensitive_rename.xctest"
-               BlueprintName = "UnTaxiTests"
-               ReferencedContainer = "container:TaxiPrimero.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "84F571611BCE958200FC18D5"
-               BuildableName = "UnTaxi.temp_caseinsensitive_rename.xctest"
-               BlueprintName = "UnTaxiUITests"
-               ReferencedContainer = "container:TaxiPrimero.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "84F571421BCE958200FC18D5"
             BuildableName = "UnTaxi.temp_caseinsensitive_rename.app"
-            BlueprintName = "TaxiPrimero"
-            ReferencedContainer = "container:TaxiPrimero.xcodeproj">
+            BlueprintName = "MyCab"
+            ReferencedContainer = "container:MyCab.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -79,8 +59,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "84F571421BCE958200FC18D5"
             BuildableName = "UnTaxi.temp_caseinsensitive_rename.app"
-            BlueprintName = "TaxiPrimero"
-            ReferencedContainer = "container:TaxiPrimero.xcodeproj">
+            BlueprintName = "MyCab"
+            ReferencedContainer = "container:MyCab.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -98,8 +78,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "84F571421BCE958200FC18D5"
             BuildableName = "UnTaxi.temp_caseinsensitive_rename.app"
-            BlueprintName = "TaxiPrimero"
-            ReferencedContainer = "container:TaxiPrimero.xcodeproj">
+            BlueprintName = "MyCab"
+            ReferencedContainer = "container:MyCab.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
@@ -108,7 +88,6 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
-      customArchiveName = "TaxiPrimero"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

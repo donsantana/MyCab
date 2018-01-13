@@ -451,7 +451,7 @@ class InicioController: UIViewController, CLLocationManagerDelegate, UITextViewD
     //MARK:- FUNCIONES PROPIAS
     func appUpdateAvailable() -> Bool
     {
-        let storeInfoURL: String = "http://itunes.apple.com/lookup?bundleId=com.xoait.1Octubre"
+        let storeInfoURL: String = "http://itunes.apple.com/lookup?bundleId=com.donelkys.mycab"
         var upgradeAvailable = false
         
         // Get the main bundle of the app so that we can determine the app's version number
@@ -492,7 +492,7 @@ class InicioController: UIViewController, CLLocationManagerDelegate, UITextViewD
             let alertaVersion = UIAlertController (title: "Versión de la aplicación", message: "Estimado cliente es necesario que actualice a la última versión de la aplicación disponible en la AppStore. ¿Desea hacerlo en este momento?", preferredStyle: .alert)
             alertaVersion.addAction(UIAlertAction(title: "Si", style: .default, handler: {alerAction in
                 
-                UIApplication.shared.openURL(URL(string: "itms://itunes.apple.com/us/app/apple-store/id1185330653?mt=8")!)
+                UIApplication.shared.openURL(URL(string: "itms://itunes.apple.com/us/app/apple-store/id1280423465?mt=8")!)
             }))
             alertaVersion.addAction(UIAlertAction(title: "No", style: .default, handler: {alerAction in
                 exit(0)
@@ -727,6 +727,7 @@ class InicioController: UIViewController, CLLocationManagerDelegate, UITextViewD
         myvariables.socket.on("V"){data, ack in            
             let temporal = String(describing: data).components(separatedBy: ",")
             myvariables.urlconductor = temporal[1]
+            print(myvariables.urlconductor)
             if UIApplication.shared.applicationState != .background {
                 if !myvariables.grabando{
                     myvariables.SMSProceso = true
@@ -1366,7 +1367,7 @@ class InicioController: UIViewController, CLLocationManagerDelegate, UITextViewD
         Inicio()
     }
     @IBAction func CompartirApp(_ sender: Any) {
-        if let name = URL(string: "itms://itunes.apple.com/us/app/apple-store/id1185330653?mt=8") {
+        if let name = URL(string: "itms://itunes.apple.com/us/app/apple-store/id1280423465?mt=8") {
             let objectsToShare = [name]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             

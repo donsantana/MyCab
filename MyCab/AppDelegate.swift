@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionDelegate, URLSe
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        GMSServices.provideAPIKey("AIzaSyDBtwwwA4h4hAtEFtkt5ktikWdq0v4rzkc")
+        GMSServices.provideAPIKey("AIzaSyCjToQ-5g0yE0jFeBQNmdgHJMxjzxUW8c4")
         application.isIdleTimerDisabled = true
         application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
         

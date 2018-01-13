@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8504C56F1E03D652F20EE2BFBDAB9B19"
-               BuildableName = "Pods_TaxiPrimero.framework"
-               BlueprintName = "Pods-TaxiPrimero"
+               BlueprintIdentifier = "5C2592582AB888F38F3A847AF5D6CD56"
+               BuildableName = "Pods_MyCab.framework"
+               BlueprintName = "Pods-MyCab"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,9 +47,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8504C56F1E03D652F20EE2BFBDAB9B19"
-            BuildableName = "Pods_TaxiPrimero.framework"
-            BlueprintName = "Pods-TaxiPrimero"
+            BlueprintIdentifier = "5C2592582AB888F38F3A847AF5D6CD56"
+            BuildableName = "Pods_MyCab.framework"
+            BlueprintName = "Pods-MyCab"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
