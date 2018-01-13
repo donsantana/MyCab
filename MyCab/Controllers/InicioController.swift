@@ -724,8 +724,10 @@ class InicioController: UIViewController, CLLocationManagerDelegate, UITextViewD
             myvariables.UrlSubirVoz = temporal[1]
         }
         
-        myvariables.socket.on("V"){data, ack in            
+        myvariables.socket.on("V"){data, ack in
+            
             let temporal = String(describing: data).components(separatedBy: ",")
+            print(temporal)
             myvariables.urlconductor = temporal[1]
             print(myvariables.urlconductor)
             if UIApplication.shared.applicationState != .background {
