@@ -58,10 +58,6 @@ class InicioController: UIViewController, CLLocationManagerDelegate, UITextViewD
     @IBOutlet weak var mapaVista : GMSMapView!
 
     
-
-    
-    
-    @IBOutlet weak var destinoText: UITextField!
     @IBOutlet weak var origenText: UITextView!
     @IBOutlet weak var referenciaText: UITextView!
 
@@ -78,8 +74,6 @@ class InicioController: UIViewController, CLLocationManagerDelegate, UITextViewD
     @IBOutlet weak var MenuView: UIView!
     @IBOutlet weak var CallCEnterBtn: UIButton!
     @IBOutlet weak var SolPendientesBtn: UIButton!
-    @IBOutlet weak var TaximetroBtn: UIButton!
-    @IBOutlet weak var TarifarioBtn: UIButton!
     @IBOutlet weak var MapaBtn: UIButton!
     @IBOutlet weak var SolPendImage: UIImageView!
     @IBOutlet weak var CantSolPendientes: UILabel!
@@ -95,19 +89,6 @@ class InicioController: UIViewController, CLLocationManagerDelegate, UITextViewD
     //Tarifario
     
     @IBOutlet weak var CancelarSolicitudProceso: UIButton!
-    
-    //TAXIMETRO
-    @IBOutlet weak var TaximetroView: UIView!
-    @IBOutlet weak var StarTaxBtn: UIButton!
-    @IBOutlet weak var StopTaxBtn: UIButton!
-    @IBOutlet weak var ApagarText: UILabel!
-    @IBOutlet weak var TimeEsperaText: UILabel!
-    @IBOutlet weak var TaximetroDistanciaText: UILabel!
-    @IBOutlet weak var ArranqueText: UILabel!
-    @IBOutlet weak var MinimaText: UILabel!
-    @IBOutlet weak var TaximetroSpeedText: UILabel!
-    @IBOutlet weak var AlertaTaximetroText: UILabel!
-    @IBOutlet weak var AlertaTaximetroView: UIView!
     
     
     var TimerTemporal = Timer()
@@ -348,7 +329,6 @@ class InicioController: UIViewController, CLLocationManagerDelegate, UITextViewD
         var espacioBtn = self.view.frame.width/4
         self.CallCEnterBtn.frame = CGRect(x: espacioBtn - 40, y: 5, width: 44, height: 44)
         self.SolPendientesBtn.frame = CGRect(x: (espacioBtn * 2 - 25), y: 5, width: 44, height: 44)
-        //self.TarifarioBtn.frame = CGRect(x: (espacioBtn * 3 - 15), y: 5, width: 44, height: 44)
         self.MapaBtn.frame = CGRect(x: (espacioBtn * 3 - 10), y: 5, width: 44, height: 44)
         self.SolPendImage.frame = CGRect(x: (espacioBtn * 2 - 10), y: 5, width: 25, height: 22)
         self.CantSolPendientes.frame = CGRect(x: (espacioBtn * 2 - 10), y: 5, width: 25, height: 22)
@@ -727,7 +707,6 @@ class InicioController: UIViewController, CLLocationManagerDelegate, UITextViewD
         myvariables.socket.on("V"){data, ack in
             
             let temporal = String(describing: data).components(separatedBy: ",")
-            print(temporal)
             myvariables.urlconductor = temporal[1]
             print(myvariables.urlconductor)
             if UIApplication.shared.applicationState != .background {
@@ -779,14 +758,12 @@ class InicioController: UIViewController, CLLocationManagerDelegate, UITextViewD
             //#Telefonos,cantidad,numerotelefono1,operadora1,siesmovil1,sitienewassap1,numerotelefono2,operadora2..,#
             self.TelefonosCallCenter = [CTelefono]()
             let temporal = String(describing: data).components(separatedBy: ",")
-            print("telefonos: \(temporal)")
             if temporal[1] != "0"{
                 var i = 2
                 while i <= temporal.count - 4{
                     let telefono = CTelefono(numero: temporal[i], operadora: temporal[i + 1].uppercased(), esmovil: temporal[i + 2], tienewhatsapp: temporal[i + 3])
                     self.TelefonosCallCenter.append(telefono)
                     i += 4
-                    
                 }
                 self.GuardarTelefonos(temporal)
             }

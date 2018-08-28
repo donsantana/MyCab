@@ -114,7 +114,7 @@ class PerfilController: UIViewController,UITableViewDataSource,UITableViewDelega
             self.present(alertaDos, animated: true, completion: nil)
 
         }else{
-        let datos = "#UpdateUser," + myvariables.cliente.idUsuario + "," + myvariables.cliente.user + "," + self.NuevoTelefonoText + "," + myvariables.cliente.email + "," + self.NuevoEmailText + "," + self.ClaveActual + "," + self.NuevaClaveText + ",# \n"
+        let datos = "#UpdateUser,\(myvariables.cliente.idUsuario),\(myvariables.cliente.user),\(self.NuevoTelefonoText),\(myvariables.cliente.email),\(self.NuevoEmailText),\(self.ClaveActual),\(self.NuevaClaveText),# \n"
             print(datos)
         EnviarSocket(datos)
         }

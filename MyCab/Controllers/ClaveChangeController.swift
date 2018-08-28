@@ -129,10 +129,9 @@ class ClaveChangeController: UIViewController, UITextFieldDelegate {
     }
 
 
-
     @IBAction func EnviarCambioClave(_ sender: AnyObject) {
         // #Cambiarclave,idusuario,claveold,clavenew
-        let datos = "#Cambiarclave," + myvariables.cliente.idUsuario + "," + ClaveActual.text! + "," + ClaveNueva.text! + ",# \n"
+        let datos = "#Cambiarclave,\(myvariables.cliente.idUsuario),\(ClaveActual.text!),\(ClaveNueva.text!),# \n"
         EnviarSocket(datos)
         self.ClaveActual.endEditing(true)
         self.ClaveNueva.endEditing(true)
@@ -188,7 +187,7 @@ class ClaveChangeController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.isEqual(self.RepiteClaveNueva){
-            let datos = "#Cambiarclave," + myvariables.cliente.idUsuario + "," + ClaveActual.text! + "," + ClaveNueva.text! + ",# \n"
+            let datos = "#Cambiarclave,\(myvariables.cliente.idUsuario),\( ClaveActual.text!),\(ClaveNueva.text!),# \n"
             EnviarSocket(datos)
         }
        textField.endEditing(true)

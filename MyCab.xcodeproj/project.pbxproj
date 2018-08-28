@@ -272,6 +272,7 @@
 		B5FB64691D1C60C3006A2C70 /* solicitudespcopia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = solicitudespcopia.png; sourceTree = "<group>"; };
 		B5FB646A1D1C60C3006A2C70 /* Tarifariocopia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tarifariocopia.png; sourceTree = "<group>"; };
 		B5FB646B1D1C60C3006A2C70 /* Taximetrocopia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Taximetrocopia.png; sourceTree = "<group>"; };
+		C608F1312134C5BE004F4CBE /* SocketIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SocketIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5321FEB68A85FD4C4AF4363 /* Pods-Rocostcar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocostcar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rocostcar/Pods-Rocostcar.debug.xcconfig"; sourceTree = "<group>"; };
 		D5B9AD7A63337B40D0A1B29D /* Pods-TaxiPrimero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxiPrimero.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaxiPrimero/Pods-TaxiPrimero.release.xcconfig"; sourceTree = "<group>"; };
 		E4C283DE81EEC8E693B9501F /* Pods-UnTaxi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnTaxi.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnTaxi/Pods-UnTaxi.release.xcconfig"; sourceTree = "<group>"; };
@@ -308,6 +309,7 @@
 		806E675426FD1B3FEF7755DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C608F1312134C5BE004F4CBE /* SocketIO.framework */,
 				AF07D6831FE4B8C000220E64 /* Pods_Rocostcar.framework */,
 				B52CA4991DE0B69300E9782C /* Canvas.framework */,
 				B5BF37841DDCB48400301DA4 /* SocketIO.framework */,
@@ -764,16 +766,16 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MyCab/Pods-MyCab-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-MyCab/Pods-MyCab-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyCab/Pods-MyCab-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyCab/Pods-MyCab-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C5C30425544E29BFD217055A /* [CP] Check Pods Manifest.lock */ = {
@@ -800,7 +802,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MyCab/Pods-MyCab-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-MyCab/Pods-MyCab-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/Canvas/Canvas.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
@@ -817,7 +819,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyCab/Pods-MyCab-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyCab/Pods-MyCab-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
