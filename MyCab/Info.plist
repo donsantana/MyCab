@@ -32,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>3</string>
 	<key>LSApplicationCategoryType</key>
 	<string> &lt;key&gt;NSAppTransportSecurity&lt;/key&gt;
  &lt;dict&gt;
@@ -46,10 +46,14 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Esta aplicación requiere acceder a su localización para encontrar los taxis más cercanos.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Esta aplicación requiere acceder a su localización para encontrar los taxis más cercanos.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>TaxiPrimero requiere acceder a su localización para encontrar los taxis más cercanos.</string>
+	<string>Esta aplicación requiere acceder a su localización para encontrar los taxis más cercanos.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>TaxiPrimero requiere acceder al microfono para enviar mensaje al conductor.</string>
+	<string>Esta aplicación requiere acceder al microfono para enviar mensaje al conductor.</string>
 	<key>NSZombieEnabled</key>
 	<string>YES</string>
 	<key>UIAppFonts</key>

@@ -51,6 +51,22 @@ class LoginController: UIViewController, UITextFieldDelegate{
         self.ClaveRecover.addGestureRecognizer(tapGesture)
         self.view.addGestureRecognizer(tapGesture)
         
+        //Verificar Actualizaciones
+        if self.appUpdateAvailable(){
+            
+            let alertaVersion = UIAlertController (title: "Versión de la aplicación", message: "Estimado cliente es necesario que actualice a la última versión de la aplicación disponible en la AppStore. ¿Desea hacerlo en este momento?", preferredStyle: .alert)
+            alertaVersion.addAction(UIAlertAction(title: "Si", style: .default, handler: {alerAction in
+                
+                UIApplication.shared.openURL(URL(string: "itms://itunes.apple.com/us/app/apple-store/id1280423465?mt=8")!)
+            }))
+            alertaVersion.addAction(UIAlertAction(title: "No", style: .default, handler: {alerAction in
+                exit(0)
+            }))
+            self.present(alertaVersion, animated: true, completion: nil)
+            
+        }
+        
+        
         if CConexionInternet.isConnectedToNetwork() == true{
            
             myvariables.socket = SocketIOClient(socketURL: URL(string: "http://173.249.14.205:6037")!, config: [.log(false), .forcePolling(true)])
@@ -80,6 +96,42 @@ class LoginController: UIViewController, UITextFieldDelegate{
         }
 
 
+    }
+    
+    func appUpdateAvailable() -> Bool
+    {
+        let storeInfoURL: String = "http://itunes.apple.com/lookup?bundleId=com.donelkys.mycab"
+        var upgradeAvailable = false
+        
+        // Get the main bundle of the app so that we can determine the app's version number
+        let bundle = Bundle.main
+        if let infoDictionary = bundle.infoDictionary {
+            // The URL for this app on the iTunes store uses the Apple ID for the  This never changes, so it is a constant
+            let urlOnAppStore = URL(string: storeInfoURL)
+            if let dataInJSON = try? Data(contentsOf: urlOnAppStore!) {
+                // Try to deserialize the JSON that we got
+                if let lookupResults = try? JSONSerialization.jsonObject(with: dataInJSON, options: JSONSerialization.ReadingOptions()) as! Dictionary<String, Any>{
+                    // Determine how many results we got. There should be exactly one, but will be zero if the URL was wrong
+                    if let resultCount = lookupResults["resultCount"] as? Int {
+                        if resultCount == 1 {
+                            // Get the version number of the version in the App Store
+                            //self.selectedRoute = (dictionary["routes"] as! Array<Dictionary<String, AnyObject>>)[0]
+                            if let appStoreVersion = (lookupResults["results"]as! Array<Dictionary<String, AnyObject>>)[0]["version"] as? String {
+                                // Get the version number of the current version
+                                if let currentVersion = infoDictionary["CFBundleShortVersionString"] as? String {
+                                    // Check if they are the same. If not, an upgrade is available.
+                                    if appStoreVersion > currentVersion {
+                                        upgradeAvailable = true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        ///Volumes/Datos/Ecuador/Desarrollo/UnTaxi/UnTaxi/LocationManager.swift:635:31: Ambiguous use of 'indexOfObject'
+        return upgradeAvailable
     }
 
     func SocketEventos(){

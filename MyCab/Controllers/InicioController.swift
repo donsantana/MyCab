@@ -101,33 +101,7 @@ class InicioController: UIViewController, CLLocationManagerDelegate, UITextViewD
         coreLocationManager = CLLocationManager()
         coreLocationManager.delegate = self
         self.referenciaText.delegate = self
-        
-        if CLLocationManager.locationServicesEnabled(){
-            switch(CLLocationManager.authorizationStatus()) {
-            case .notDetermined, .restricted, .denied:
-                coreLocationManager.requestWhenInUseAuthorization()
-            case .authorizedAlways, .authorizedWhenInUse:
-            
-            break
-                
-            }
-        }else{
-            let locationAlert = UIAlertController (title: "Error de Localización", message: "Estimado cliente es necesario que active la localización de su dispositivo.", preferredStyle: .alert)
-            locationAlert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {alerAction in
-                //UIApplication.shared.open(URL(string:"App-Prefs:root=LOCATION_SERVICES")!)
-                UIApplication.shared.openURL(NSURL(string:"App-Prefs:root=Privacy&path=LOCATION_SERVICES")! as URL)
-            }))
-            locationAlert.addAction(UIAlertAction(title: "No", style: .default, handler: {alerAction in
-            exit(0)
-            }))
-            self.present(locationAlert, animated: true, completion: nil)
-
-        }
-         //solicitud de autorización para acceder a la localización del usuario
-
-        coreLocationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        coreLocationManager.startUpdatingLocation()  //Iniciar servicios de actualiación de localización del usuario
-        
+   
         let JSONStyle = "[" +
             "  {" +
             "    \"featureType\": \"all\"," +
@@ -317,11 +291,27 @@ class InicioController: UIViewController, CLLocationManagerDelegate, UITextViewD
         }
 
         mapaVista.isMyLocationEnabled = false
+        self.coreLocationManager.requestWhenInUseAuthorization()
         if let tempLocation = self.coreLocationManager.location?.coordinate{
             self.miposicion = tempLocation
             self.mapaVista.camera = GMSCameraPosition.camera(withLatitude: (tempLocation.latitude), longitude: (tempLocation.longitude), zoom: 15.0)
         }else{
-            coreLocationManager.requestAlwaysAuthorization()
+            let locationAlert = UIAlertController (title: "Error de Localización", message: "Estimado cliente es necesario que active la localización de su dispositivo.", preferredStyle: .alert)
+            locationAlert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {alerAction in
+                if #available(iOS 10.0, *) {
+                    let settingsURL = URL(string: UIApplicationOpenSettingsURLString)!
+                    UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+                } else {
+                    if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
+                        UIApplication.shared.openURL(url as URL)
+                    }
+                }
+            }))
+            locationAlert.addAction(UIAlertAction(title: "No", style: .default, handler: {alerAction in
+                exit(0)
+            }))
+            self.present(locationAlert, animated: true, completion: nil)
+            
             self.mapaVista.camera = GMSCameraPosition.camera(withLatitude: -2.173714, longitude: -79.921601, zoom: 12.0)
         }
         
@@ -387,6 +377,38 @@ class InicioController: UIViewController, CLLocationManagerDelegate, UITextViewD
         }
     }
     
+    func checkLocationPermissions(){
+        if CLLocationManager.locationServicesEnabled(){
+            switch(CLLocationManager.authorizationStatus()) {
+            case .notDetermined, .restricted, .denied:
+                print("hereeee NO")
+                coreLocationManager.requestWhenInUseAuthorization()
+            case .authorizedAlways, .authorizedWhenInUse:
+                coreLocationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+                coreLocationManager.startUpdatingLocation()  //Iniciar servicios de actualiación de localización del usuario
+                break
+                
+            }
+        }else{
+            let locationAlert = UIAlertController (title: "Error de Localización", message: "Estimado cliente es necesario que active la localización de su dispositivo.", preferredStyle: .alert)
+            locationAlert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {alerAction in
+                if #available(iOS 10.0, *) {
+                    let settingsURL = URL(string: UIApplicationOpenSettingsURLString)!
+                    UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+                } else {
+                    if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
+                        UIApplication.shared.openURL(url as URL)
+                    }
+                }
+            }))
+            locationAlert.addAction(UIAlertAction(title: "No", style: .default, handler: {alerAction in
+                exit(0)
+            }))
+            self.present(locationAlert, animated: true, completion: nil)
+            
+        }
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
             self.miposicion = (locations.last?.coordinate)!
             self.setuplocationMarker(miposicion)
@@ -429,58 +451,10 @@ class InicioController: UIViewController, CLLocationManagerDelegate, UITextViewD
     }
     
     //MARK:- FUNCIONES PROPIAS
-    func appUpdateAvailable() -> Bool
-    {
-        let storeInfoURL: String = "http://itunes.apple.com/lookup?bundleId=com.donelkys.mycab"
-        var upgradeAvailable = false
-        
-        // Get the main bundle of the app so that we can determine the app's version number
-        let bundle = Bundle.main
-        if let infoDictionary = bundle.infoDictionary {
-            // The URL for this app on the iTunes store uses the Apple ID for the  This never changes, so it is a constant
-            let urlOnAppStore = URL(string: storeInfoURL)
-            if let dataInJSON = try? Data(contentsOf: urlOnAppStore!) {
-                // Try to deserialize the JSON that we got
-                if let lookupResults = try? JSONSerialization.jsonObject(with: dataInJSON, options: JSONSerialization.ReadingOptions()) as! Dictionary<String, Any>{
-                    // Determine how many results we got. There should be exactly one, but will be zero if the URL was wrong
-                    if let resultCount = lookupResults["resultCount"] as? Int {
-                        if resultCount == 1 {
-                            // Get the version number of the version in the App Store
-                            //self.selectedRoute = (dictionary["routes"] as! Array<Dictionary<String, AnyObject>>)[0]
-                            if let appStoreVersion = (lookupResults["results"]as! Array<Dictionary<String, AnyObject>>)[0]["version"] as? String {
-                                // Get the version number of the current version
-                                if let currentVersion = infoDictionary["CFBundleShortVersionString"] as? String {
-                                    // Check if they are the same. If not, an upgrade is available.
-                                    if appStoreVersion > currentVersion {
-                                        upgradeAvailable = true
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        ///Volumes/Datos/Ecuador/Desarrollo/UnTaxi/UnTaxi/LocationManager.swift:635:31: Ambiguous use of 'indexOfObject'
-        return upgradeAvailable
-    }
+
     func SocketEventos(){
         //Evento sockect para escuchar
         //TRAMA IN: #LoginPassword,loginok,idusuario,idrol,idcliente,nombreapellidos,cantsolpdte,idsolicitud,idtaxi,cod,fechahora,lattaxi,lngtaxi,latorig,lngorig,latdest,lngdest,telefonoconductor
-        if self.appUpdateAvailable(){
-            
-            let alertaVersion = UIAlertController (title: "Versión de la aplicación", message: "Estimado cliente es necesario que actualice a la última versión de la aplicación disponible en la AppStore. ¿Desea hacerlo en este momento?", preferredStyle: .alert)
-            alertaVersion.addAction(UIAlertAction(title: "Si", style: .default, handler: {alerAction in
-                
-                UIApplication.shared.openURL(URL(string: "itms://itunes.apple.com/us/app/apple-store/id1280423465?mt=8")!)
-            }))
-            alertaVersion.addAction(UIAlertAction(title: "No", style: .default, handler: {alerAction in
-                exit(0)
-            }))
-            self.present(alertaVersion, animated: true, completion: nil)
-
-        }
-        
         
         myvariables.socket.on("LoginPassword"){data, ack in
             let temporal = String(describing: data).components(separatedBy: ",")
